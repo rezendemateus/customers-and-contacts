@@ -2,10 +2,16 @@ import "dotenv/config";
 import "reflect-metadata";
 import { DataSource, DataSourceOptions } from "typeorm";
 import path from "path";
+import { Client } from "./entities/client.entity";
+import { Contact } from "./entities/contact.entity";
+import { initialMigration1679773602096 } from "./migrations/1679773602096-initialMigration";
 
 const dataSourceConfig = (): DataSourceOptions => {
-  const entitiesPath: string = path.join(__dirname, "./entities/**.{ts, js}");
-  const migrationsPath: string = path.join(__dirname, ".migrations/**.{ts,js}");
+  const entitiesPath: string = path.join(__dirname, "./entities/**.{ts,js}");
+  const migrationsPath: string = path.join(
+    __dirname,
+    "./migrations/**.{ts,js}"
+  );
 
   const dbUrl: string | undefined = process.env.DATABASE_URL;
 
@@ -29,8 +35,8 @@ const dataSourceConfig = (): DataSourceOptions => {
     url: dbUrl,
     synchronize: false,
     logging: true,
-    migrations: [migrationsPath],
-    entities: [entitiesPath],
+    migrations: [initialMigration1679773602096],
+    entities: [Client, Contact],
   };
 };
 const AppDataSource = new DataSource(dataSourceConfig());
