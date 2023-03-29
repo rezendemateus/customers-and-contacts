@@ -1,9 +1,45 @@
 import { Request, Response } from "express";
-import { createClientsService } from "../services/clients/createClients.services";
+import { createClientService } from "../services/clients/createClient.services";
+import { deleteClientService } from "../services/clients/deleteClient.service";
+import { getClientByIdService } from "../services/clients/getClientById.service";
+import { getClientsService } from "../services/clients/getClients.service";
+import { updateClientService } from "../services/clients/updateClient.service";
 
-const createClientsController = async (req: Request, res: Response) => {
-  const newUser = await createClientsService(req.body);
+const createClientController = async (req: Request, res: Response) => {
+  const newUser = await createClientService(req.body);
   return res.status(201).json(newUser);
 };
 
-export { createClientsController };
+const updateClientcontroller = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const payload = req.body;
+
+  const updatedUser = await updateClientService(id, payload);
+  return res.status(200).json(updatedUser);
+};
+
+const getClientbyIdController = async (req: Request, res: Response) => {
+  const id = req.params.id;
+
+  const client = await getClientByIdService(id);
+  return res.status(200).json(client);
+};
+
+const getClientsController = async (req: Request, res: Response) => {
+  const clients = await getClientsService();
+  return res.status(200).json(clients);
+};
+
+const deleteClientController = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  await deleteClientService(id);
+  return res.status(200).json();
+};
+
+export {
+  createClientController,
+  updateClientcontroller,
+  getClientbyIdController,
+  getClientsController,
+  deleteClientController,
+};

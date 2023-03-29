@@ -3,9 +3,9 @@ import { AppDataSource } from "../../data-source";
 import { Client } from "../../entities/client.entity";
 import { AppError } from "../../errors/errors";
 import { IClientRequest, IClientResponse } from "../../interfaces/clients";
-import { returnClientSchema } from "../../serializers/clients.serializers";
+import { returnClientSchema } from "../../schemas/clients.serializers";
 
-const createClientsService = async (
+const createClientService = async (
   data: IClientRequest
 ): Promise<IClientResponse> => {
   const clientRepository: Repository<Client> =
@@ -22,10 +22,12 @@ const createClientsService = async (
 
   const client: Client = clientRepository.create(data);
   await clientRepository.save(client);
+
   const newClient = await returnClientSchema.validate(client, {
     stripUnknown: true,
   });
+
   return newClient!;
 };
 
-export { createClientsService };
+export { createClientService };

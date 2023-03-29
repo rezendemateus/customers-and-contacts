@@ -1,14 +1,31 @@
 import { Router } from "express";
-import { createClientsController } from "../controllers/clients.controllers";
+import {
+  createClientController,
+  deleteClientController,
+  getClientbyIdController,
+  getClientsController,
+  updateClientcontroller,
+} from "../controllers/clients.controllers";
 import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.middleware";
-import { clientSchema } from "../serializers/clients.serializers";
+import {
+  clientSchema,
+  updateClientSchema,
+} from "../schemas/clients.serializers";
 
 const clientsRoutes = Router();
 
+clientsRoutes.get("", getClientsController);
+clientsRoutes.get("/:id", getClientbyIdController);
 clientsRoutes.post(
   "",
   ensureDataIsValidMiddleware(clientSchema),
-  createClientsController
+  createClientController
 );
+clientsRoutes.patch(
+  "/:id",
+  ensureDataIsValidMiddleware(updateClientSchema),
+  updateClientcontroller
+);
+clientsRoutes.delete("/:id", deleteClientController);
 
 export default clientsRoutes;

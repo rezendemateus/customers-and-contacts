@@ -17,7 +17,15 @@ interface IClientResponse {
   telephone: string;
   createdAt: Date;
   updatedAt: Date;
-  contacts?: IContactResponse[];
+  contacts: IContactResponse[];
 }
 
-export { IClientRequest, IClientResponse };
+interface IClientUpdate {
+  name?: string;
+  cpf?: string;
+  password?: string;
+  telephone?: string;
+  email?: string;
+}
+
+export { IClientRequest, IClientResponse, IClientUpdate };

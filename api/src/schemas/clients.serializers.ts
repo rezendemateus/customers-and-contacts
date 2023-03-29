@@ -15,9 +15,23 @@ const returnClientSchema = yup.object().shape({
   cpf: yup.string(),
   email: yup.string().email(),
   telephone: yup.string(),
-  contacts: yup.array(returncontactSchema).optional().nullable(),
+  contacts: yup.array(returncontactSchema),
   createdAt: yup.date(),
   updatedAt: yup.date(),
 });
 
-export { clientSchema, returnClientSchema };
+const updateClientSchema = yup.object().shape({
+  name: yup.string().optional(),
+  cpf: yup.string().optional(),
+  email: yup.string().email().optional(),
+  telephone: yup.string().optional(),
+});
+
+const listClientsSchema = yup.array(returnClientSchema);
+
+export {
+  clientSchema,
+  returnClientSchema,
+  updateClientSchema,
+  listClientsSchema,
+};
