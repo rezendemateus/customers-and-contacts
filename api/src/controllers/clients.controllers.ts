@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createClientService } from "../services/clients/createClient.services";
+import { createClientService } from "../services/clients/createClient.service";
 import { deleteClientService } from "../services/clients/deleteClient.service";
 import { getClientByIdService } from "../services/clients/getClientById.service";
 import { getClientsService } from "../services/clients/getClients.service";
