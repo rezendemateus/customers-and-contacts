@@ -3,7 +3,7 @@ import { AppDataSource } from "../../data-source";
 import { Client } from "../../entities/client.entity";
 import { AppError } from "../../errors/errors";
 import { IClientRequest, IClientResponse } from "../../interfaces/clients";
-import { returnClientSchema } from "../../schemas/clients.serializers";
+import { returnClientSchema } from "../../schemas/clients.schemas";
 
 const createClientService = async (
   data: IClientRequest

@@ -2,7 +2,7 @@ import { AppDataSource } from "../../data-source";
 import { Client } from "../../entities/client.entity";
 import { AppError } from "../../errors/errors";
 import { IClientResponse } from "../../interfaces/clients";
-import { returnClientSchema } from "../../schemas/clients.serializers";
+import { returnClientSchema } from "../../schemas/clients.schemas";
 
 const getClientByIdService = async (id: string): Promise<IClientResponse> => {
   if (!id) {

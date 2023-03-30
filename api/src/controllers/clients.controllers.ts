@@ -19,9 +19,7 @@ const updateClientcontroller = async (req: Request, res: Response) => {
 };
 
 const getClientbyIdController = async (req: Request, res: Response) => {
-  const id = req.params.id;
-
-  const client = await getClientByIdService(id);
+  const client = await getClientByIdService(req.params.id);
   return res.status(200).json(client);
 };
 
@@ -31,8 +29,7 @@ const getClientsController = async (req: Request, res: Response) => {
 };
 
 const deleteClientController = async (req: Request, res: Response) => {
-  const id = req.params.id;
-  await deleteClientService(id);
+  await deleteClientService(req.params.id);
   return res.status(200).json();
 };
 

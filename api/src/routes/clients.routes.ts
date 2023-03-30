@@ -7,10 +7,7 @@ import {
   updateClientcontroller,
 } from "../controllers/clients.controllers";
 import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.middleware";
-import {
-  clientSchema,
-  updateClientSchema,
-} from "../schemas/clients.serializers";
+import { clientSchema, updateClientSchema } from "../schemas/clients.schemas";
 
 const clientsRoutes = Router();
 

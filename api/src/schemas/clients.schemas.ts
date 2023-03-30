@@ -1,4 +1,4 @@
-import { returncontactSchema } from "./contacts.serializers";
+import { returnContactSchema } from "./contacts.schemas";
 import * as yup from "yup";
 
 const clientSchema = yup.object().shape({
@@ -15,7 +15,7 @@ const returnClientSchema = yup.object().shape({
   cpf: yup.string(),
   email: yup.string().email(),
   telephone: yup.string(),
-  contacts: yup.array(returncontactSchema),
+  contacts: yup.array(returnContactSchema),
   createdAt: yup.date(),
   updatedAt: yup.date(),
 });

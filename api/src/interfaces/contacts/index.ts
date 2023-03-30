@@ -1,6 +1,10 @@
 import { IClientResponse } from "../clients";
 
-interface IContact {}
+interface IContactRequest {
+  name: string;
+  telephone: string;
+  email: string;
+}
 
 interface IContactResponse {
   id: string;
@@ -12,4 +16,4 @@ interface IContactResponse {
   client?: IClientResponse;
 }
 
-export { IContactResponse };
+export { IContactResponse, IContactRequest };

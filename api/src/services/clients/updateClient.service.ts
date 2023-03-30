@@ -5,7 +5,7 @@ import { IClientUpdate } from "../../interfaces/clients";
 import {
   returnClientSchema,
   updateClientSchema,
-} from "../../schemas/clients.serializers";
+} from "../../schemas/clients.schemas";
 
 const updateClientService = async (id: string, payload: IClientUpdate) => {
   if (!id) {
