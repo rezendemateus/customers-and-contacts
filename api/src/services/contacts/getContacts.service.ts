@@ -1,4 +1,5 @@
 import { AppDataSource } from "../../data-source";
+import { Client } from "../../entities/client.entity";
 import { Contact } from "../../entities/contact.entity";
 import { listContactSchema } from "../../schemas/contacts.schemas";
 

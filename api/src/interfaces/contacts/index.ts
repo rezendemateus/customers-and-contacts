@@ -4,6 +4,13 @@ interface IContactRequest {
   name: string;
   telephone: string;
   email: string;
+  clientId: string;
+}
+
+interface IContactUpdate {
+  name: string;
+  telephone: string;
+  email: string;
 }
 
 interface IContactResponse {
@@ -16,4 +23,4 @@ interface IContactResponse {
   client?: IClientResponse;
 }
 
-export { IContactResponse, IContactRequest };
+export { IContactResponse, IContactRequest, IContactUpdate };

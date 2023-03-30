@@ -9,14 +9,19 @@ const getClientByIdService = async (id: string): Promise<IClientResponse> => {
     throw new AppError("Invalid id!", 400);
   }
 
-  const clientRepository = AppDataSource.getRepository(Client);
-  const client = await clientRepository.findOneBy({ id });
+  const client = await AppDataSource.getRepository(Client)
+    .createQueryBuilder("client")
+    .leftJoinAndSelect("client.contacts", "contacts")
+    .where("client.id = :id", { id })
+    .getOne();
 
-  if (!client || !client.isActive) {
+  if (!client) {
     throw new AppError("User does not exists", 404);
   }
 
-  const foundClient = await returnClientSchema.validate(client);
+  const foundClient = await returnClientSchema.validate(client, {
+    stripUnknown: true,
+  });
 
   return foundClient;
 };
