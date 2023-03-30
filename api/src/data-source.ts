@@ -5,6 +5,7 @@ import path from "path";
 import { Client } from "./entities/client.entity";
 import { Contact } from "./entities/contact.entity";
 import { initialMigration1679773602096 } from "./migrations/1679773602096-initialMigration";
+import { clientDeletedAt1680125824618 } from "./migrations/1680125824618-clientDeletedAt";
 
 const dataSourceConfig = (): DataSourceOptions => {
   const entitiesPath: string = path.join(__dirname, "./entities/**.{ts,js}");
@@ -35,7 +36,7 @@ const dataSourceConfig = (): DataSourceOptions => {
     url: dbUrl,
     synchronize: false,
     logging: true,
-    migrations: [initialMigration1679773602096],
+    migrations: [initialMigration1679773602096, clientDeletedAt1680125824618],
     entities: [Client, Contact],
   };
 };

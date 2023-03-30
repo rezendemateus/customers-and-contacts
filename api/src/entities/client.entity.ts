@@ -41,9 +41,12 @@ class Client {
   @UpdateDateColumn()
   updatedAt: Date;
 
+  @DeleteDateColumn()
+  deletedAt: Date;
+
   @BeforeInsert()
   @BeforeUpdate()
-  hashPassword() {
+  hashPassword(): void {
     this.password = hashSync(this.password, 10);
   }
 
