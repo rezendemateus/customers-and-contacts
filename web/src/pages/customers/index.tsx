@@ -1,7 +1,8 @@
+import ButtonSubmit from "@/components/ButtonSubmit";
 import Header from "@/components/Header";
 import api from "@/services/api";
 import { ICustomer } from "@/types";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -29,17 +30,30 @@ const Customers: NextPage<IProps> = () => {
         <h1>Customers</h1>
       </Header>
       <ul className="customers_list">
-        {customers.map((customer, index) => {
-          return (
-            <li className="customer_card" key={index}>
-              <a href={`/customers/${customer.id}`}>
-                <h2>{customer.name}</h2>
-                <h3>{customer.cpf}</h3>
-              </a>
-            </li>
-          );
-        })}
+        {customers.length >= 0 ? (
+          <span className="no_customers">No customers! </span>
+        ) : (
+          customers.map((customer, index) => {
+            return (
+              <li className="customer_card" key={index}>
+                <a href={`/customers/${customer.id}`}>
+                  <h2>{customer.name}</h2>
+                  <h3>{customer.cpf}</h3>
+                </a>
+              </li>
+            );
+          })
+        )}
       </ul>
+      <ButtonSubmit
+        type="button"
+        onClick={(el) => {
+          el.preventDefault();
+          window.location.href = "/customers/create";
+        }}
+      >
+        New Customer
+      </ButtonSubmit>
     </StyledCustomers>
   );
 };
@@ -56,12 +70,19 @@ const StyledCustomers = styled.div`
 
   .customers_list {
     width: 80%;
-    height: 95%;
+    height: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 15px;
+    border: 2px solid var(--blue-2);
+    border-radius: 15px;
+
+    .no_customers {
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
 
     .customer_card {
       width: 100%;

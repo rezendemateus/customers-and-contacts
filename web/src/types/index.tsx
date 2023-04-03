@@ -9,6 +9,14 @@ interface ICustomer {
   contacts: IContact[];
 }
 
+interface ICustomerRequest {
+  name: string;
+  cpf: string;
+  email: string;
+  telephone: string;
+  password: string;
+}
+
 interface IContact {
   id: string;
   name: string;
@@ -19,4 +27,4 @@ interface IContact {
   client?: ICustomer;
 }
 
-export { type IContact, type ICustomer };
+export { type IContact, type ICustomer, type ICustomerRequest };

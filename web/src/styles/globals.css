@@ -20,7 +20,12 @@ button {
 :root {
   --blue: #1400e1;
   --blue-2: #1c1ce4;
+  --blue-transparent: #1300e167;
 
   --black-1: #0a0a0a;
   --black-2: rgba(21, 21, 21, 0.696);
+
+  --light-gray: rgba(128, 128, 128, 0.824);
+
+  --white: rgb(255, 255, 255);
 }
