@@ -1,18 +1,34 @@
-import styled from "styled-components";
+import { AppBar } from "@mui/material";
+import { ReactElement } from "react";
+import Typography from "@mui/material/Typography";
 
-const Header = styled.header`
-  width: 100%;
-  height: 80px;
-  background-color: var(--blue-2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+interface IHeaderProps {
+  //   children: ReactElement;
+  text: string;
+}
 
-  h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: white;
-  }
-`;
+const Header = ({ text }: IHeaderProps) => {
+  return (
+    <AppBar
+      sx={{
+        backgroundColor: "white",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "60px",
+      }}
+    >
+      <Typography
+        sx={{
+          color: "rgb(6, 12, 109)",
+          fontSize: "1.75rem",
+          fontWeight: "700",
+        }}
+      >
+        {text}
+      </Typography>
+    </AppBar>
+  );
+};
 
 export default Header;
