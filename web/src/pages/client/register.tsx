@@ -1,16 +1,11 @@
 import Header from "@/components/Header";
-import {
-  Button,
-  Container,
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  TextField,
-} from "@mui/material";
+import { Button, Container, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { regiterUserSerializer } from "@/serializers/client.serializers";
 import { IClientRequest } from "@/interfaces/clients";
+import { toast } from "react-toastify";
+import api from "@/services/api";
 
 const Register = () => {
   const {
@@ -22,7 +17,12 @@ const Register = () => {
   });
 
   const onSubmit = async (data: any) => {
-    console.log(data);
+    try {
+      await api.post("/clients", data);
+      return toast.success("Deu certo!");
+    } catch (error) {
+      return toast.error(error);
+    }
   };
 
   return (
@@ -49,7 +49,7 @@ const Register = () => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: "36px",
+            gap: "24px",
             padding: "40px 0",
             borderRadius: "14px",
           }}
@@ -80,16 +80,18 @@ const Register = () => {
               fontWeight: "500",
             }}
             type="text"
-            placeholder="Cpf"
+            placeholder="Cpf (numbers only)"
             required
           />
           <span
             style={{
               display: "inline",
-              height: "auto",
+              height: "0.86rem",
               color: "black",
-              position: "absolute",
-              marginTop: "20px",
+              marginTop: "-20px",
+              fontSize: "0.85rem",
+              fontFamily: "Roboto",
+              color: "red",
             }}
           >
             {errors.cpf?.message}
@@ -108,6 +110,19 @@ const Register = () => {
             placeholder="Email"
             required
           />
+          <span
+            style={{
+              display: "inline",
+              height: "0.86rem",
+              color: "black",
+              marginTop: "-20px",
+              fontSize: "0.85rem",
+              fontFamily: "Roboto",
+              color: "red",
+            }}
+          >
+            {errors.email?.message}
+          </span>
           <TextField
             {...register("telephone")}
             sx={{
@@ -119,9 +134,22 @@ const Register = () => {
               fontWeight: "500",
             }}
             type="text"
-            placeholder="telephone"
+            placeholder="Telephone (numbers only)"
             required
           />
+          <span
+            style={{
+              display: "inline",
+              height: "0.86rem",
+              color: "black",
+              marginTop: "-20px",
+              fontSize: "0.85rem",
+              fontFamily: "Roboto",
+              color: "red",
+            }}
+          >
+            {errors.telephone?.message}
+          </span>
           <TextField
             {...register("password")}
             sx={{
@@ -136,9 +164,21 @@ const Register = () => {
             placeholder="Password"
             required
           />
+          <span
+            style={{
+              display: "inline",
+              height: "0.86rem",
+              color: "black",
+              marginTop: "-20px",
+              fontSize: "0.85rem",
+              fontFamily: "Roboto",
+              color: "red",
+            }}
+          >
+            {errors.password?.message}
+          </span>
           <Button
             type="submit"
-            onClick={() => console.log("teste")}
             sx={{
               backgroundColor: "rgb(6,12,109)",
               color: "rgb(241, 241, 241)",
