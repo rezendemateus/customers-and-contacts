@@ -19,6 +19,7 @@ const Register = () => {
   const onSubmit = async (data: any) => {
     try {
       await api.post("/clients", data);
+      window.location.pathname = "/client";
       return toast.success("Deu certo!");
     } catch (error) {
       return toast.error(error);

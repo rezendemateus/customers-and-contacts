@@ -40,6 +40,13 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
+
+  --blue-1: rgb(6, 12, 109);
+
+  --grey-1: rgb(241, 241, 241);
+  --grey-2: #9f9f9f;
+
+  --black: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
