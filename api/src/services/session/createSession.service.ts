@@ -7,12 +7,10 @@ import jwt from "jsonwebtoken";
 
 const createSessionService = async (data: ICreateSessionRequest) => {
   const clientRepository = AppDataSource.getRepository(Client);
-  console.log(data);
 
   const user = await clientRepository.findOneBy({
     email: data.email,
   });
-  console.log(user);
 
   const passwordMatch = await compare(data.password, user.password);
 
