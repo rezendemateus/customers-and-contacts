@@ -11,6 +11,8 @@ import {
   contactSchema,
   updateContactSchema,
 } from "../schemas/contacts.schemas";
+import { ensureOwnerMiddleware } from "../middlewares/ensureOwner.middleware,";
+import ensureAuthMiddleware from "../middlewares/ensureAuth.middleware";
 
 const contactsRoutes = Router();
 
@@ -18,11 +20,14 @@ contactsRoutes.get("", getContactsController);
 contactsRoutes.get("/:id", getContactByIdController);
 contactsRoutes.post(
   "",
+  ensureAuthMiddleware,
   ensureDataIsValidMiddleware(contactSchema),
   createContactController
 );
 contactsRoutes.patch(
   "/:id",
+  ensureAuthMiddleware,
+  ensureOwnerMiddleware,
   ensureDataIsValidMiddleware(updateContactSchema),
   updateContactController
 );

@@ -16,7 +16,7 @@ const ensureAuthMiddleware = async (
 
   token = token.split(" ")[1];
 
-  jwt.verify(token, process.env.SCRET_KEY, (error, decoded: any) => {
+  jwt.verify(token, process.env.SECRET_KEY, (error, decoded: any) => {
     if (error) {
       throw new AppError(error.message, 401);
     }
@@ -25,6 +25,8 @@ const ensureAuthMiddleware = async (
       id: decoded.sub,
     };
   });
+
+  next();
 };
 
 export default ensureAuthMiddleware;

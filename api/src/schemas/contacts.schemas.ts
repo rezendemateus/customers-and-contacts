@@ -5,7 +5,6 @@ const contactSchema = yup.object().shape({
   name: yup.string().required(),
   email: yup.string().email().required(),
   telephone: yup.string().required(),
-  clientId: yup.string().required(),
 });
 
 const returnContactSchema = yup.object().shape({
