@@ -4,4 +4,8 @@ interface IClitentProvider {
   children: ReactNode;
 }
 
-export { type IClitentProvider };
+interface ILoginProvider {
+  children: ReactNode;
+}
+
+export { type IClitentProvider, type ILoginProvider };

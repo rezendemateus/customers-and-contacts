@@ -19,9 +19,9 @@ const Register = () => {
   const onSubmit = async (data: any) => {
     try {
       await api.post("/clients", data);
-      window.location.pathname = "/client";
-      return toast.success("Deu certo!");
-    } catch (error) {
+      window.location.pathname = "";
+      return toast.success("Registered!");
+    } catch (error: any) {
       return toast.error(error);
     }
   };

@@ -1,7 +1,23 @@
+import { LoginContext } from "@/contexts/login";
+import { useForm } from "react-hook-form";
+import { ILoginRequest } from "@/interfaces/login";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Button, Container, InputLabel, TextField } from "@mui/material";
-import { useRouter } from "next/router";
+import { useContext } from "react";
+import { loginSerializer } from "@/serializers/login.serializer";
+import { toast } from "react-toastify";
 
 const Homepage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ILoginRequest>({
+    resolver: yupResolver(loginSerializer),
+  });
+
+  const { login } = useContext(LoginContext);
+
   return (
     <Container
       sx={{
@@ -25,6 +41,7 @@ const Homepage = () => {
           padding: "40px 20px",
           borderRadius: "10px",
           width: "50%",
+          minWidth: "370px",
           gap: "15px",
         }}
       >
@@ -37,6 +54,7 @@ const Homepage = () => {
             gap: "10px",
             width: "90%",
           }}
+          onSubmit={handleSubmit(login)}
         >
           <InputLabel>Email</InputLabel>
           <TextField
@@ -44,6 +62,7 @@ const Homepage = () => {
             sx={{
               width: "100%",
             }}
+            {...register("email")}
           />
 
           <InputLabel>Password</InputLabel>
@@ -53,15 +72,32 @@ const Homepage = () => {
             sx={{
               width: "100%",
             }}
+            {...register("password")}
           ></TextField>
           <Box
             className="submit"
             sx={{
               width: "100%",
-              textAlign: "center",
               marginTop: "15px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "15px",
             }}
           >
+            {errors.email?.message || errors.password?.message ? (
+              <span
+                style={{
+                  color: "red",
+                  height: "10px",
+                  fontSize: "0.75rem",
+                  marginTop: "-10px",
+                }}
+              >
+                Please check that the information provided is correct.
+              </span>
+            ) : null}
             <Button
               type="submit"
               sx={{
@@ -86,7 +122,7 @@ const Homepage = () => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: "8px",
+            gap: "15px",
             width: "90%",
           }}
         >
