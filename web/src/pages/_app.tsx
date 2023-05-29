@@ -1,3 +1,4 @@
+import { ClientProvider } from "@/contexts/client";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import React from "react";
@@ -7,7 +8,9 @@ import "react-toastify/dist/ReactToastify.css";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Component {...pageProps} />
+      <ClientProvider>
+        <Component {...pageProps} />
+      </ClientProvider>
       <ToastContainer />
     </>
   );

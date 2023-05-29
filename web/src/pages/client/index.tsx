@@ -20,11 +20,14 @@ import { useForm } from "react-hook-form";
 const Client = () => {
   const [clients, setClients] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [cardId, setCardId] = useState();
   const [dataModal, setDataModal] = useState({});
-  const updateClient = useContext(ClientContext);
+  const { updateClient } = useContext(ClientContext);
 
   const { register, handleSubmit } = useForm();
+
+  const onSubmit = async (data) => {
+    updateClient(data, dataModal.id);
+  };
 
   useEffect(() => {
     const loadClients = async () => {
@@ -82,12 +85,10 @@ const Client = () => {
                       overflow: "hidden",
                     }}
                     onClick={async () => {
-                      setCardId(client.id);
                       setDataModal(client);
                       setModalIsOpen(true);
                       setDataModal(client);
-                      setCardId(client.id);
-                      console.log(dataModal);
+                      console.log(client);
                     }}
                   >
                     <h3>{client.name}</h3>
