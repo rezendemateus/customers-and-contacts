@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 
 :root {
-  --max-width: 1100px;
+  --max-width: 100vw;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
@@ -36,11 +36,6 @@
     #00000080
   );
 
-  --callout-rgb: 238, 240, 241;
-  --callout-border-rgb: 172, 175, 176;
-  --card-rgb: 180, 185, 188;
-  --card-border-rgb: 131, 134, 135;
-
   --blue-1: rgb(6, 12, 109);
   --blue-2: rgba(6, 11, 109, 0.842);
 
@@ -48,6 +43,10 @@
   --grey-2: #9f9f9f;
 
   --black: #000000;
+}
+
+.MuiContainer-root {
+  max-width: 100vw;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -10,14 +10,12 @@ import {
   ListItem,
   Modal,
   TextField,
-  Input,
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { IoClose } from "react-icons/io5";
 import { ClientContext } from "@/contexts/client";
 import { useForm } from "react-hook-form";
-import { Router } from "next/router";
+import { IClientRequest } from "@/interfaces/clients";
 
 const Client = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -27,8 +25,10 @@ const Client = () => {
 
   const { register, handleSubmit, setValue } = useForm({});
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: IClientRequest) => {
     updateClient(data, idToUpdate);
+    setModalIsOpen(false);
+    loadClients();
   };
 
   useEffect(() => {
@@ -40,6 +40,7 @@ const Client = () => {
       <Container
         sx={{
           width: "100vw",
+          maxWidth: "none",
           height: "calc(100vh - 60px)",
           backgroundColor: "var(--blue-1)",
           display: "flex",
@@ -50,19 +51,21 @@ const Client = () => {
       >
         <List
           sx={{
-            width: "90%",
+            width: "100%",
             height: "90%",
             display: "flex",
             flexDirection: "row",
+            flexWrap: "wrap",
             alignItems: "flex-start",
             justifyContent: "flex-start",
             padding: "0",
+            overflow: "scroll",
           }}
         >
           {clients.length > 0 ? (
             clients.map((client, index) => {
               return (
-                <ListItem key={index}>
+                <ListItem key={index} sx={{ width: "auto" }}>
                   <Card
                     sx={{
                       backgroundColor: "var(--grey-1)",
