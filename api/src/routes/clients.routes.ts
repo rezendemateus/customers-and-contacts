@@ -17,7 +17,6 @@ clientsRoutes.get("", ensureAuthMiddleware, getClientsController);
 clientsRoutes.get("/:id", ensureAuthMiddleware, getClientbyIdController);
 clientsRoutes.post(
   "",
-  ensureAuthMiddleware,
   ensureDataIsValidMiddleware(clientSchema),
   createClientController
 );

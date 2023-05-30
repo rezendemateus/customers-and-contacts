@@ -8,6 +8,7 @@ const ensureAuthMiddleware = async (
   res: Response,
   next: NextFunction
 ) => {
+  console.log(req.headers.authorization);
   let token = req.headers.authorization;
 
   if (!token) {
