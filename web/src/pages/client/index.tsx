@@ -18,28 +18,20 @@ import { ClientContext } from "@/contexts/client";
 import { useForm } from "react-hook-form";
 
 const Client = () => {
-  const [clients, setClients] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [dataModal, setDataModal] = useState({});
-  const { updateClient } = useContext(ClientContext);
+  const [idToUpdate, settIdToUpdate] = useState("");
+  const { updateClient, loadClients, clients } = useContext(ClientContext);
 
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data) => {
-    updateClient(data, dataModal.id);
+    updateClient(data, idToUpdate);
   };
 
   useEffect(() => {
-    const loadClients = async () => {
-      try {
-        const clients = (await api.get("/clients")).data;
-        return setClients(clients);
-      } catch (error) {
-        toast.error("Ops. Algo deu errado!");
-      }
-    };
     loadClients();
-  }, [clients]);
+  }, []);
 
   return (
     <>
@@ -84,11 +76,12 @@ const Client = () => {
                       width: "250px",
                       overflow: "hidden",
                     }}
-                    onClick={async () => {
+                    onClick={async (el) => {
+                      el.preventDefault();
                       setDataModal(client);
+                      settIdToUpdate(client.id);
+                      console.log(dataModal, idToUpdate);
                       setModalIsOpen(true);
-                      setDataModal(client);
-                      console.log(client);
                     }}
                   >
                     <h3>{client.name}</h3>
@@ -108,6 +101,7 @@ const Client = () => {
         open={modalIsOpen}
         onClose={() => {
           setModalIsOpen(false);
+          setDataModal("");
         }}
         sx={{
           display: "flex",

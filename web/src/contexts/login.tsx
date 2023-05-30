@@ -9,9 +9,10 @@ export const LoginContext = createContext({} as ILoginContext);
 
 export const LoginProvider = ({ children }: ILoginProvider) => {
   const login = async (data: any) => {
+    console.log(data);
     try {
-      const token = (await api.post("/login", data)).data.token;
-      localStorage.setItem("Token:", token);
+      const getToken = await api.post("/login", data);
+      localStorage.setItem("Token", getToken.data.token);
       Router.push("/client");
       return toast.success("Logged!");
     } catch (error) {
