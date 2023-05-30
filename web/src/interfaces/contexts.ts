@@ -12,6 +12,8 @@ interface IClientContext {
 
 interface ILoginContext {
   login: (data: ILoginRequest) => void;
+  token: string;
+  setToken: Dispatch<SetStateAction<string>>;
 }
 
 export { type IClientContext, type ILoginContext };

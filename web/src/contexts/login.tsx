@@ -1,18 +1,19 @@
 import { ILoginContext } from "@/interfaces/contexts";
 import { ILoginProvider } from "@/interfaces/providers";
 import api from "@/services/api";
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import { toast } from "react-toastify";
 import Router from "next/router";
 
 export const LoginContext = createContext({} as ILoginContext);
 
 export const LoginProvider = ({ children }: ILoginProvider) => {
+  const [token, setToken] = useState("");
+
   const login = async (data: any) => {
-    console.log(data);
     try {
       const getToken = await api.post("/login", data);
-      localStorage.setItem("Token", getToken.data.token);
+      setToken(getToken.data.token);
       Router.push("/client");
       return toast.success("Logged!");
     } catch (error) {
@@ -21,6 +22,8 @@ export const LoginProvider = ({ children }: ILoginProvider) => {
   };
 
   return (
-    <LoginContext.Provider value={{ login }}>{children}</LoginContext.Provider>
+    <LoginContext.Provider value={{ login, token, setToken }}>
+      {children}
+    </LoginContext.Provider>
   );
 };

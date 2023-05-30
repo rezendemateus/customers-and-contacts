@@ -10,12 +10,14 @@ import {
   ListItem,
   Modal,
   TextField,
+  Input,
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { IoClose } from "react-icons/io5";
 import { ClientContext } from "@/contexts/client";
 import { useForm } from "react-hook-form";
+import { Router } from "next/router";
 
 const Client = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -23,7 +25,7 @@ const Client = () => {
   const [idToUpdate, settIdToUpdate] = useState("");
   const { updateClient, loadClients, clients } = useContext(ClientContext);
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm({});
 
   const onSubmit = async (data) => {
     updateClient(data, idToUpdate);
@@ -32,7 +34,6 @@ const Client = () => {
   useEffect(() => {
     loadClients();
   }, []);
-
   return (
     <>
       <Header text="Clients" />
@@ -76,11 +77,13 @@ const Client = () => {
                       width: "250px",
                       overflow: "hidden",
                     }}
-                    onClick={async (el) => {
-                      el.preventDefault();
-                      setDataModal(client);
+                    onClick={() => {
                       settIdToUpdate(client.id);
-                      console.log(dataModal, idToUpdate);
+                      setValue("name", client.name);
+                      setValue("cpf", client.cpf);
+                      setValue("email", client.email);
+                      setValue("telephone", client.telephone);
+                      setValue("contacts", client.contacts);
                       setModalIsOpen(true);
                     }}
                   >
@@ -145,34 +148,17 @@ const Client = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <InputLabel>Name</InputLabel>
-            <TextField
-              name="name"
-              placeholder={dataModal.name}
-              defaultValue={dataModal.name}
-              {...register("name")}
-            />
+            <TextField {...register("name")} />
 
             <InputLabel>Cpf</InputLabel>
-            <TextField
-              name="cpf"
-              placeholder={dataModal.cpf}
-              defaultValue={dataModal.cpf}
-              {...register("cpf")}
-            />
+            <TextField placeholder={dataModal.cpf} {...register("cpf")} />
 
             <InputLabel>Email</InputLabel>
-            <TextField
-              name="email"
-              placeholder={dataModal.email}
-              defaultValue={dataModal.email}
-              {...register("email")}
-            />
+            <TextField placeholder={dataModal.email} {...register("email")} />
 
             <InputLabel>Telephone</InputLabel>
             <TextField
-              name="telephone"
               placeholder={dataModal.telephone}
-              defaultValue={dataModal.telephone}
               {...register("telephone")}
             />
 
