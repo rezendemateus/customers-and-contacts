@@ -8,4 +8,8 @@ interface ILoginProvider {
   children: ReactNode;
 }
 
-export { type IClitentProvider, type ILoginProvider };
+interface IContactProvider {
+  children: ReactNode;
+}
+
+export { type IClitentProvider, type ILoginProvider, type IContactProvider };

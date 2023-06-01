@@ -12,4 +12,11 @@ const regiterUserSerializer = yup.object().shape({
   password: yup.string().required().min(8, "Min. 8 characters!"),
 });
 
-export { regiterUserSerializer };
+const updateClientSerializer = yup.object().shape({
+  name: yup.string().optional(),
+  cpf: yup.string().optional(),
+  email: yup.string().email().optional(),
+  telephone: yup.string().optional(),
+});
+
+export { regiterUserSerializer, updateClientSerializer };

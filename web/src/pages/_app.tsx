@@ -1,4 +1,5 @@
 import { ClientProvider } from "@/contexts/client";
+import { ContactProvider } from "@/contexts/contacts";
 import { LoginProvider } from "@/contexts/login";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
@@ -11,7 +12,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <LoginProvider>
         <ClientProvider>
-          <Component {...pageProps} />
+          <ContactProvider>
+            <Component {...pageProps} />
+          </ContactProvider>
         </ClientProvider>
       </LoginProvider>
       <ToastContainer />

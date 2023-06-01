@@ -25,6 +25,7 @@ interface IClientUpdate {
   password?: string;
   telephone?: string;
   email?: string;
+  contacts?: IContactResponse[];
 }
 
 export { type IClientRequest, type IClientResponse, type IClientUpdate };

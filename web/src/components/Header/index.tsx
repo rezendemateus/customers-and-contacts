@@ -1,11 +1,7 @@
 import { AppBar } from "@mui/material";
 import { ReactElement } from "react";
 import Typography from "@mui/material/Typography";
-
-interface IHeaderProps {
-  //   children: ReactElement;
-  text: string;
-}
+import { IHeaderProps } from "@/interfaces/header";
 
 const Header = ({ text }: IHeaderProps) => {
   return (

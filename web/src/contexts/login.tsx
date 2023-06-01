@@ -8,12 +8,11 @@ import Router from "next/router";
 export const LoginContext = createContext({} as ILoginContext);
 
 export const LoginProvider = ({ children }: ILoginProvider) => {
-  const [token, setToken] = useState("");
-
   const login = async (data: any) => {
     try {
       const getToken = await api.post("/login", data);
-      setToken(getToken.data.token);
+      localStorage.setItem("Token", getToken.data.token);
+
       Router.push("/client");
       return toast.success("Logged!");
     } catch (error) {
@@ -22,8 +21,6 @@ export const LoginProvider = ({ children }: ILoginProvider) => {
   };
 
   return (
-    <LoginContext.Provider value={{ login, token, setToken }}>
-      {children}
-    </LoginContext.Provider>
+    <LoginContext.Provider value={{ login }}>{children}</LoginContext.Provider>
   );
 };

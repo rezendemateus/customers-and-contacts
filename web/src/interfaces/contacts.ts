@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import { IClientResponse } from "./clients";
 
 interface IContactRequest {
@@ -23,4 +24,16 @@ interface IContactResponse {
   client?: IClientResponse;
 }
 
-export { type IContactResponse, type IContactRequest, type IContactUpdate };
+interface IEditClientModal {
+  modalIsOpen: boolean;
+  setModalIsOpen: Dispatch<SetStateAction<boolean>>;
+  dataModal: IClientResponse;
+  id: string;
+}
+
+export {
+  type IContactResponse,
+  type IContactRequest,
+  type IContactUpdate,
+  type IEditClientModal,
+};
