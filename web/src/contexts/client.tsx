@@ -3,6 +3,7 @@ import { IClitentProvider } from "../interfaces/providers";
 import { createContext, useEffect, useState } from "react";
 import api from "@/services/api";
 import { toast } from "react-toastify";
+import Router from "next/router";
 
 export const ClientContext = createContext({} as IClientContext);
 
@@ -14,8 +15,12 @@ export const ClientProvider = ({ children }: IClitentProvider) => {
     if (typeof window !== undefined) {
       const getToken = localStorage.getItem("Token");
       setToken(getToken);
+      if (!token) {
+        Router.push("/");
+      }
+      loadClients();
     }
-  }, []);
+  }, [token]);
 
   const registerClient = async (data: any) => {
     try {
@@ -32,7 +37,6 @@ export const ClientProvider = ({ children }: IClitentProvider) => {
 
   const updateClient = async (data: any, id: string) => {
     try {
-      console.log(token);
       await api.patch(`/clients/${id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -54,7 +58,7 @@ export const ClientProvider = ({ children }: IClitentProvider) => {
       });
       setClients(clients.data);
     } catch (error) {
-      toast.error("Ops. Algo deu errado!");
+      console.log(error);
     }
   };
 

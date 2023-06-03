@@ -4,21 +4,23 @@ import { useContext, useEffect, useState } from "react";
 import { ClientContext } from "@/contexts/client";
 import { EditClientModal } from "@/components/EditClientModal";
 import Router from "next/router";
+import { IClientResponse } from "@/interfaces/clients";
 
 const Client = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [dataModal, setDataModal] = useState({});
+  const [dataModal, setDataModal] = useState({} as IClientResponse);
   const [idToUpdate, setIdToUpdate] = useState("");
   const { loadClients, clients } = useContext(ClientContext);
   const { token, setToken } = useContext(ClientContext);
 
-  if (!token) {
-    // Router.push("");
-  }
-
   useEffect(() => {
+    const getToken = localStorage.getItem("Token");
+    setToken(getToken);
+    if (!token) {
+      Router.push("/");
+    }
     loadClients();
-  }, []);
+  }, [token]);
 
   return (
     <>
@@ -48,7 +50,7 @@ const Client = () => {
             overflow: "scroll",
           }}
         >
-          {clients.length > 0 ? (
+          {clients && clients.length > 0 ? (
             clients.map((client, index) => {
               return (
                 <ListItem key={index} sx={{ width: "auto" }}>

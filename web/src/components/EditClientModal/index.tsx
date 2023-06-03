@@ -13,9 +13,8 @@ import {
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoClose } from "react-icons/io5";
+import "dotenv/config";
 import { ContactModal } from "../ContactModal.tsx";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { updateClientSerializer } from "@/serializers/client.serializers.js";
 
 const EditClientModal = ({
   modalIsOpen,

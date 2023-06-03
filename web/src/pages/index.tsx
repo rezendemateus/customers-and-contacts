@@ -5,7 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Button, Container, InputLabel, TextField } from "@mui/material";
 import { useContext } from "react";
 import { loginSerializer } from "@/serializers/login.serializer";
-import { toast } from "react-toastify";
+import Router from "next/router";
+import { ClientContext } from "@/contexts/client";
 
 const Homepage = () => {
   const {
@@ -18,6 +19,11 @@ const Homepage = () => {
 
   const { login } = useContext(LoginContext);
 
+  const { token } = useContext(ClientContext);
+
+  if (token) {
+    Router.push("/client");
+  }
   return (
     <Container
       sx={{

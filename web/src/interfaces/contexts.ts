@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { IClientRequest } from "./clients";
+import { IClientRequest, IClientResponse } from "./clients";
 import { ILoginRequest } from "./login";
 import { IContactRequest } from "./contacts";
 
@@ -8,7 +8,7 @@ interface IClientContext {
   updateClient: (data: IClientRequest, id: string) => void;
   deleteClient: (id: string) => void;
   loadClients: () => void;
-  clients: never[];
+  clients: IClientResponse[];
   setClients: Dispatch<SetStateAction<never[]>>;
   token: string | null;
   setToken: Dispatch<SetStateAction<string | null>>;
