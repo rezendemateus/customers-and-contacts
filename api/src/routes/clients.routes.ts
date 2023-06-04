@@ -8,11 +8,13 @@ import {
 } from "../controllers/clients.controllers";
 import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.middleware";
 import { clientSchema, updateClientSchema } from "../schemas/clients.schemas";
+import ensureAuthMiddleware from "../middlewares/ensureAuth.middleware";
+import { ensurePermission } from "../middlewares/ensurePermission.middleware";
 
 const clientsRoutes = Router();
 
-clientsRoutes.get("", getClientsController);
-clientsRoutes.get("/:id", getClientbyIdController);
+clientsRoutes.get("", ensureAuthMiddleware, getClientsController);
+clientsRoutes.get("/:id", ensureAuthMiddleware, getClientbyIdController);
 clientsRoutes.post(
   "",
   ensureDataIsValidMiddleware(clientSchema),
@@ -20,9 +22,16 @@ clientsRoutes.post(
 );
 clientsRoutes.patch(
   "/:id",
+  ensureAuthMiddleware,
+  ensurePermission,
   ensureDataIsValidMiddleware(updateClientSchema),
   updateClientcontroller
 );
-clientsRoutes.delete("/:id", deleteClientController);
+clientsRoutes.delete(
+  "/:id",
+  ensureAuthMiddleware,
+  ensurePermission,
+  deleteClientController
+);
 
 export default clientsRoutes;
