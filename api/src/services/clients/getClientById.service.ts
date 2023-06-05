@@ -16,7 +16,7 @@ const getClientByIdService = async (id: string): Promise<IClientResponse> => {
     .getOne();
 
   if (!client) {
-    throw new AppError("User does not exists", 404);
+    throw new AppError("Client does not exists", 404);
   }
 
   const foundClient = await returnClientSchema.validate(client, {

@@ -1,0 +1,340 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Customers and contacts",
+    "description": "Documentation from customers and contacts",
+    "version": "1.0.0"
+  },
+  "basePath": "/",
+  "components": {
+    "bearerAuth": {
+      "type": "http",
+      "schema": "bearer",
+      "bearerFormat": "JWT"
+    }
+  },
+
+  "paths": {
+    "/login": {
+      "post": {
+        "description": "Login route",
+        "summary": "Route to login with registered userRoute to login with registered user",
+        "tags": ["Login"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Email or password invalid!"
+          }
+        }
+      }
+    },
+    "/clients": {
+      "post": {
+        "description": "Create customer route",
+        "summary": "Route for customer registration",
+        "tags": ["Clients"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "cpf": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "telephone": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "409": {
+            "description": "User already exists"
+          }
+        }
+      },
+      "get": {
+        "security": [{ "bearerAuth": [] }],
+        "description": "Get all clients",
+        "summary": "Route to fetch all customers. You must be registered and logged in to succeed.",
+        "tags": ["Clients"],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/clients/:id": {
+      "get": {
+        "parameters": {
+          "in": "query",
+          "name": "id",
+          "type": "string"
+        },
+        "security": [{ "bearerAuth": [] }],
+        "description": "Get customer by id",
+        "summary": "Fetch customer data by id",
+        "tags": ["Clients"],
+        "responses": {
+          "201": {
+            "description": "Ok"
+          },
+          "401": {
+            "description": "Unautthorized"
+          },
+          "404": {
+            "description": "Client does not exists"
+          }
+        }
+      },
+      "patch": {
+        "security": [{ "bearerAuth": [] }],
+        "description": "Update client",
+        "summary": "Update client searching by id. It is possible only for the customer registered by the logged in user",
+        "tags": ["Clients"],
+        "parameters": {
+          "in": "query",
+          "name": "id",
+          "type": "string"
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "cpf": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "telephone": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "User already exists"
+          }
+        }
+      },
+      "delete": {
+        "security": [{ "bearerAuth": [] }],
+        "description": "Delete client",
+        "summary": "Delete client searching by id. It is possible only for the customer registered by the logged in user",
+        "tags": ["Clients"],
+        "parameters": {
+          "in": "query",
+          "name": "id",
+          "type": "string"
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/contacts": {
+      "get": {
+        "security": [{ "bearerAuth": [] }],
+        "description": "Get all contacts",
+        "summary": "Route to fetch all contacts. You must be registered and logged in to succeed.",
+        "tags": ["Contacts"],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/contacts/:id": {
+      "post": {
+        "parameters": {
+          "in": "query",
+          "name": "id",
+          "type": "string"
+        },
+        "security": [{ "bearerAuth": [] }],
+        "description": "Create contact route",
+        "summary": "Route for contact registration",
+        "tags": ["Clients"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+
+                  "email": {
+                    "type": "string"
+                  },
+                  "telephone": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "409": {
+            "description": "Contact already exists"
+          }
+        }
+      },
+      "patch": {
+        "parameters": {
+          "in": "query",
+          "name": "id",
+          "type": "string"
+        },
+        "security": [{ "bearerAuth": [] }],
+        "description": "Update contact route",
+        "summary": "Route for contact update. It is possible only for the customer registered by the logged in user",
+        "tags": ["Contacts"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+
+                  "email": {
+                    "type": "string"
+                  },
+                  "telephone": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      },
+      "get": {
+        "parameters": {
+          "in": "query",
+          "name": "id",
+          "type": "string"
+        },
+        "security": [{ "bearerAuth": [] }],
+        "description": "Get contact by id",
+        "summary": "Fetch contact data by id",
+        "tags": ["Contacts"],
+        "responses": {
+          "201": {
+            "description": "Ok"
+          },
+          "401": {
+            "deacription": "Unauthorized"
+          },
+          "404": {
+            "deacription": "Contact does not exists"
+          }
+        }
+      },
+      "delete": {
+        "security": [{ "bearerAuth": [] }],
+        "description": "Delete customer",
+        "summary": "Delete client searching by id. It is possible only for the customer registered by the logged in user",
+        "tags": ["Contacts"],
+        "parameters": {
+          "in": "query",
+          "name": "id",
+          "type": "string"
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  }
+}
