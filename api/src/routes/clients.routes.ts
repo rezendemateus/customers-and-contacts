@@ -23,14 +23,14 @@ clientsRoutes.post(
 clientsRoutes.patch(
   "/:id",
   ensureAuthMiddleware,
-  ensurePermission,
+  // ensurePermission,
   ensureDataIsValidMiddleware(updateClientSchema),
   updateClientcontroller
 );
 clientsRoutes.delete(
   "/:id",
   ensureAuthMiddleware,
-  ensurePermission,
+  // ensurePermission,
   deleteClientController
 );
 
