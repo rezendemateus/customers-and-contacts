@@ -15,7 +15,7 @@ export const ClientProvider = ({ children }: IClitentProvider) => {
     if (typeof window !== undefined) {
       const getToken = localStorage.getItem("Token");
       setToken(getToken);
-      if (!token) {
+      if (location.pathname !== "/client/register" && !token) {
         Router.push("/");
       }
       loadClients();
