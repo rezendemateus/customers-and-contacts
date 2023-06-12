@@ -1,11 +1,9 @@
 import { ILoginContext } from "@/interfaces/contexts";
 import { ILoginProvider } from "@/interfaces/providers";
 import api from "@/services/api";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext } from "react";
 import { toast } from "react-toastify";
 import Router from "next/router";
-import { ClientContext } from "./client";
-import jwt from "jsonwebtoken";
 
 export const LoginContext = createContext({} as ILoginContext);
 
